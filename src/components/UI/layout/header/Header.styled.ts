@@ -1,25 +1,23 @@
 import styled from 'styled-components';
 import theme from '../../../../utils/styledCompentsUtils/theme';
 import { MEDIA_QUERIES } from '../../../../GlobalStyles';
+import { MenuProps } from './Header.types';
 
 const mobileHeaderHigh = '7rem';
 const menuGap = '2rem';
 
 export const HeaderContainer = styled.header`
+  position: relative;
+  color: ${theme.colors.white};
   background-color: ${theme.colors.primary};
   min-height: ${mobileHeaderHigh};
   height: 8vh;
   width: 100%;
   padding: 0 5%;
-
   margin: 0 auto;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  color: ${theme.colors.white};
-  position: relative;
 `;
 
 export const Logo = styled.h2`
@@ -35,10 +33,6 @@ export const Logo = styled.h2`
   }
 `;
 
-type MenuProps = {
-  isMenuOpened: boolean;
-};
-
 export const Menu = styled.div<MenuProps>`
   display: flex;
   align-items: center;
@@ -47,19 +41,17 @@ export const Menu = styled.div<MenuProps>`
   @media (max-width: ${MEDIA_QUERIES.w50}) {
     display: ${(p) => (p.isMenuOpened ? 'flex' : 'none')};
 
-    position: absolute;
-    flex-direction: column;
-    align-items: flex-end;
-
     top: 0;
     right: 0;
     padding: 2rem 3rem 2rem 5rem;
+    flex-direction: column;
+    align-items: flex-end;
+    position: absolute;
     transform: translateY(${mobileHeaderHigh});
     background-color: ${theme.colors.primaryShaded};
   }
 `;
 
-export const Nav = styled.nav``;
 export const NavList = styled.ul`
   list-style: none;
   display: flex;
@@ -86,8 +78,7 @@ export const LanguageButton = styled.button`
   font-size: 1.6rem;
   padding: 1.2rem;
   border: none;
-  border-radius: 50px;
-
+  border-radius: 100%;
   font-weight: 700;
 
   &:hover {

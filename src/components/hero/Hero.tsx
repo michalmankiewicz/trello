@@ -15,11 +15,10 @@ function Hero() {
         </Title>
         <Description>{t('hero.description')}</Description>
         <Button>
-          {/* This will depend if user is logged and will be implemented later */}
+          {/* TODO This will depend if user is logged and will be implemented later */}
           <Link to="/boards">{t('hero.getStarted')}</Link>{' '}
         </Button>
       </Headline>
-
       <Img src="assets/hero-section.svg" alt="People using kanban board" />
     </HeroContainer>
   );

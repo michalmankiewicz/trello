@@ -2,15 +2,9 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Header from './Header';
 import TestWrapper from '../../../../utils/testUtils/testUtils';
+import userEvent from '@testing-library/user-event';
 
-// import userEvent from '@testing-library/user-event';
-// import { debug } from 'console';
-
-jest.mock('react-i18next', () => ({
-  initReactI18next: { type: '3rdParty', init: jest.fn() },
-  useTranslation: () => ({ t: (key: string) => key }),
-  Trans: ({ children }: { children: React.ReactNode }) => children,
-}));
+beforeEach(() => history.pushState({}, '', '/'));
 
 describe('Header component', () => {
   test('renders Header', () => {
@@ -29,45 +23,38 @@ describe('Header component', () => {
     expect(signUp).toBeInTheDocument();
   });
 
-  // test('renders appropiate navlinks when click Log in', () => {
-  //   render(
-  //     <TestWrapper>
-  //       <Header />
-  //     </TestWrapper>
-  //   );
+  test('renders appropiate navlinks when click Log in', () => {
+    render(
+      <TestWrapper>
+        <Header />
+      </TestWrapper>
+    );
 
-  //   const logIn = screen.getByText('Log in');
-  //   const signUp = screen.getByText('Sign up');
+    const logIn = screen.getByText('Log in');
+    const signUp = screen.getByText('Sign up');
 
-  //   userEvent.click(logIn);
+    userEvent.click(logIn);
 
-  //   expect(logIn).not.toBeInTheDocument();
-  //   expect(signUp).not.toBeInTheDocument();
-  //   // TODO Can it be prettier
-  //   expect(global.window.location.pathname).toContain('/auth');
-  // });
+    expect(logIn).not.toBeInTheDocument();
+    expect(signUp).not.toBeInTheDocument();
 
-  // test('renders appropiate translate when clicks on language button', () => {
-  //   render(
-  //     <TestWrapper>
-  //       <Header />
-  //     </TestWrapper>
-  //   );
+    expect(window.location.pathname).toContain('/auth');
+  });
 
-  //   debug(undefined, 999);
-  //   // TODO Testing I18next
-  //   const languageButton = screen.getByText('EN');
-  //   userEvent.click(languageButton);
+  test('renders appropiate translate when clicks on language button', () => {
+    render(
+      <TestWrapper>
+        <Header />
+      </TestWrapper>
+    );
 
-  //   // const changedLanguageButton = screen.getAllByText('PL');
+    const languageButton = screen.getByText('EN');
+    userEvent.click(languageButton);
 
-  //   // expect().toBeCalledTimes(1);
+    const logIn = screen.getByText('Zaloguj się');
+    const signUp = screen.getByText('Zarejestruj się');
 
-  //   // const logIn = screen.getByText('Zaloguj się');
-  //   // const signUp = screen.getByText('Zarejestruj się');
-
-  //   // expect(logIn).toBeInTheDocument();
-  //   // expect(signUp).toBeInTheDocument();
-  //   // expect(changedLanguageButton).toBeInTheDocument();
-  // });
+    expect(logIn).toBeInTheDocument();
+    expect(signUp).toBeInTheDocument();
+  });
 });

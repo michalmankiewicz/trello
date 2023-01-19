@@ -3,7 +3,6 @@ import {
   HeaderContainer,
   Logo,
   Menu,
-  Nav,
   NavList,
   NavItem,
   LanguageButton,
@@ -17,7 +16,6 @@ import { navLinkOptions } from '../../../../utils/navLinksUtils/navLinkUtils';
 function Header() {
   const { i18n, t } = useTranslation();
 
-  // Changing language
   const toggleLanguage = () => {
     if (i18n.language === 'en') i18n.changeLanguage('pl');
     else if (i18n.language === 'pl') i18n.changeLanguage('en');
@@ -29,8 +27,7 @@ function Header() {
   const [isMenuOpened, setIsMenuOpened] = useState(false);
 
   const toggleMenu = () => {
-    if (isMenuOpened) setIsMenuOpened(false);
-    else setIsMenuOpened(true);
+    setIsMenuOpened((prevState) => !prevState);
   };
 
   const closeMenu = () => {
@@ -47,15 +44,15 @@ function Header() {
         <Link to="/">Trello</Link>
       </Logo>
       <Menu isMenuOpened={isMenuOpened}>
-        <Nav>
+        <nav>
           <NavList>
             {navLinks?.map((el) => (
-              <NavItem onClick={closeMenu} key={el.camelCase}>
-                <Link to={el.toPath}>{t(`header.${el.camelCase}`)}</Link>
+              <NavItem onClick={closeMenu} key={el.id}>
+                <Link to={el.toPath}>{t(`header.${el.id}`)}</Link>
               </NavItem>
             ))}
           </NavList>
-        </Nav>
+        </nav>
         <LanguageButton onClick={toggleLanguage}>{i18n.language.toUpperCase()}</LanguageButton>
       </Menu>
       <ActionsMobile onClick={toggleMenu}>

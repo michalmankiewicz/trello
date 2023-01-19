@@ -2,31 +2,31 @@ export const navLinkOptions: {
   text: string;
   paths: string[];
   toPath: string;
-  camelCase: string;
+  id: string;
 }[] = [
   {
     text: 'Log In',
     paths: ['/'],
     toPath: 'auth',
-    camelCase: 'logIn',
+    id: 'logIn',
   },
   {
     text: 'Sign up',
     paths: ['/'],
     toPath: 'auth',
-    camelCase: 'signUp',
+    id: 'signUp',
   },
   {
     text: 'Sign out',
     paths: ['/boards', '/edit-profile'],
     toPath: '/',
-    camelCase: 'signOut',
+    id: 'signOut',
   },
 
   {
     text: 'Edit profile',
     paths: ['/boards'],
     toPath: '/edit-profile',
-    camelCase: 'editProfile',
+    id: 'editProfile',
   },
 ];

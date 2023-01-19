@@ -16,9 +16,9 @@ export const HeroContainer = styled.div`
 export const Headline = styled.div`
   display: flex;
   flex-direction: column;
-
   justify-self: flex-start;
   gap: 2.4rem;
+
   @media (max-width: ${MEDIA_QUERIES.w64}) {
     text-align: center;
     align-items: center;

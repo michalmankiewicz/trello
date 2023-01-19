@@ -1,20 +1,6 @@
-import styled from 'styled-components';
+import { MainContainer } from './Main.styled';
 
-export const MainContainer = styled.main`
-  margin: 1rem auto 0 auto;
-  max-width: 140rem;
-  width: 85%;
-
-  @media (max-width: 64rem) {
-    margin: 3rem auto 0 auto;
-  }
-`;
-
-type Props = {
-  children?: React.ReactNode;
-};
-
-const Main = (props: Props) => {
+const Main = (props: React.PropsWithChildren) => {
   return <MainContainer>{props.children}</MainContainer>;
 };
 
