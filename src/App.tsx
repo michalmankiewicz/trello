@@ -19,7 +19,9 @@ function App() {
           <Route path="/" element={<Homepage />} />
           <Route path="/boards" element={<Boards />} />
           <Route path="/boards/:boardId" element={<BoardDetails />} />
-          <Route path="/auth" element={<Auth />} />
+          <Route path="/signup" element={<Auth />} />
+
+          <Route path="/login" element={<Auth />} />
           <Route path="/edit-profile" element={<EditProfile />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

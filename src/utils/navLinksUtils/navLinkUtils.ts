@@ -7,13 +7,13 @@ export const navLinkOptions: {
   {
     text: 'Log In',
     paths: ['/'],
-    toPath: 'auth',
+    toPath: 'login',
     id: 'logIn',
   },
   {
     text: 'Sign up',
     paths: ['/'],
-    toPath: 'auth',
+    toPath: 'signup',
     id: 'signUp',
   },
   {

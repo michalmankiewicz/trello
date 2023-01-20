@@ -23,6 +23,19 @@ i18next
             signOut: 'Sign out',
             editProfile: 'Edit profile',
           },
+          logIn: {
+            title: 'Log in',
+            name: 'Name',
+            password: 'Password',
+            toggleText: `Don't have account yet? <1>Register</1>`,
+          },
+
+          signUp: {
+            title: 'Sign up',
+            name: 'Name',
+            password: 'Password',
+            toggleText: 'Already have an account? <1>Sign in</1>',
+          },
         },
       },
       pl: {
@@ -39,6 +52,19 @@ i18next
             signOut: 'Wyloguj się',
             editProfile: 'Edytuj profil',
           },
+          logIn: {
+            title: 'Zaloguj się',
+            name: 'Nazwa',
+            password: 'Hasło',
+            toggleText: `Nie posiadasz konta? <1>Zarejestruj się</1>`,
+          },
+
+          signUp: {
+            title: 'Zarejestruj się',
+            name: 'Nazwa',
+            password: 'Hasło',
+            toggleText: 'Posiadasz już konto? <1>Zaloguj się</1>',
+          },
         },
       },
     },
@@ -48,5 +74,4 @@ i18next
       escapeValue: false,
     },
   });
-
 export default i18next;
