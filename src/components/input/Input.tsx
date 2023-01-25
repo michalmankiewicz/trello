@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import { FieldError } from 'react-hook-form/dist/types';
-
-import { ErrorMessage, InputContainer, InputField, Label } from './Input.styled';
+import { InputContainer, InputField, Label } from './Input.styled';
+import InputErrorMessage from './inputError/InputErrorMessage';
 
 type Props = React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -15,16 +15,9 @@ const Input = forwardRef<Ref, Props>(({ error, label, ...props }, ref) => {
     <InputContainer>
       <Label htmlFor={label}>{label}</Label>
       <InputField {...props} id={label} ref={ref} />
-      {error && <ErrorMessage>{error.message}</ErrorMessage>}
+      {error?.message && <InputErrorMessage errorMessage={error.message} />}
     </InputContainer>
   );
 });
 
 export default Input;
-
-// <div classlabel={styles.item}>
-//   <h3 classlabel={styles.title}>{props.title}</h3>
-
-//   <input type={props.type} classlabel={styles.input} ref={ref} onChange={props.onChange} />
-//   {!props.isValid && <InputError />}
-// </div>;

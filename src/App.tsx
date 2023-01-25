@@ -9,6 +9,8 @@ import GlobalStyles from './GlobalStyles';
 import theme from './utils/styledCompentsUtils/theme';
 import Layout from './components/UI/layout/Layout';
 import EditProfile from './pages/EditProfile';
+import RequireAuth from './components/auth/routeAuthorization/RequireAuth';
+import DisableAuth from './components/auth/routeAuthorization/DisableAuth';
 
 function App() {
   return (
@@ -17,12 +19,15 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Homepage />} />
-          <Route path="/boards" element={<Boards />} />
-          <Route path="/boards/:boardId" element={<BoardDetails />} />
-          <Route path="/signup" element={<Auth />} />
-
-          <Route path="/login" element={<Auth />} />
-          <Route path="/edit-profile" element={<EditProfile />} />
+          <Route element={<DisableAuth />}>
+            <Route path="/signup" element={<Auth />} />
+            <Route path="/login" element={<Auth />} />
+          </Route>
+          <Route element={<RequireAuth />}>
+            <Route path="/boards" element={<Boards />} />
+            <Route path="/boards/:boardId" element={<BoardDetails />} />
+            <Route path="/edit-profile" element={<EditProfile />} />
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>

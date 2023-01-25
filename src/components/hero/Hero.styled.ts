@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import theme from '../../utils/styledCompentsUtils/theme';
 import { MEDIA_QUERIES } from '../../GlobalStyles';
+import { Link } from 'react-router-dom';
 
 export const HeroContainer = styled.div`
   display: flex;
@@ -38,24 +39,19 @@ export const Title = styled.h1`
 `;
 export const Description = styled.p`
   font-size: 2.6rem;
-  color: ${theme.colors.grey};
+  color: ${theme.colors.grey1};
 
   @media (max-width: ${MEDIA_QUERIES.w50}) {
     font-size: 2.4rem;
   }
 `;
-export const Button = styled.button`
+export const StyledLink = styled(Link)`
   background-color: ${theme.colors.primary};
   color: ${theme.colors.white};
-  border: none;
+  text-decoration: none;
   font-size: 2rem;
   padding: 1.8rem 3.6rem;
   align-self: flex-start;
-
-  & a {
-    text-decoration: none;
-    color: inherit;
-  }
 
   &:hover {
     cursor: pointer;

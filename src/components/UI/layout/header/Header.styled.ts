@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import theme from '../../../../utils/styledCompentsUtils/theme';
 import { MEDIA_QUERIES } from '../../../../GlobalStyles';
 import { MenuProps } from './Header.types';
+import { Link } from 'react-router-dom';
 
 const mobileHeaderHigh = '7rem';
 const menuGap = '2rem';
@@ -20,16 +21,28 @@ export const HeaderContainer = styled.header`
   justify-content: space-between;
 `;
 
-export const Logo = styled.h2`
-  font-size: 4rem;
+export const Logo = styled(Link)`
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  text-decoration: none;
+
+  & img {
+    background-color: ${theme.colors.white};
+    width: 4rem;
+    padding: 0.4rem;
+    border-radius: 100%;
+  }
+
+  & p {
+    color: ${theme.colors.white};
+    font-weight: 700;
+    font-size: 3rem;
+    margin-top: 0.2rem;
+  }
 
   &:hover {
     cursor: pointer;
-  }
-
-  & a {
-    color: inherit;
-    text-decoration: none;
   }
 `;
 
@@ -40,7 +53,6 @@ export const Menu = styled.div<MenuProps>`
 
   @media (max-width: ${MEDIA_QUERIES.w50}) {
     display: ${(p) => (p.isMenuOpened ? 'flex' : 'none')};
-
     top: 0;
     right: 0;
     padding: 2rem 3rem 2rem 5rem;
@@ -62,6 +74,7 @@ export const NavList = styled.ul`
     align-items: flex-end;
   }
 `;
+
 export const NavItem = styled.li`
   font-size: 2.4rem;
 
@@ -74,6 +87,7 @@ export const NavItem = styled.li`
     text-decoration: none;
   }
 `;
+
 export const LanguageButton = styled.button`
   font-size: 1.6rem;
   padding: 1.2rem;

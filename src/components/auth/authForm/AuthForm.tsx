@@ -1,44 +1,30 @@
-import { Link, useNavigate } from 'react-router-dom';
-import Input from '../input/Input';
-import {
-  AuthContainer,
-  Controls,
-  SubmitButton,
-  Title,
-  ToggleParagraph,
-  ServerErrorMessage,
-} from './AuthForm.styled';
+import { Link } from 'react-router-dom';
+import Input from '../../input/Input';
+import { AuthContainer, Controls, SubmitButton, Title, ToggleParagraph } from './AuthForm.styled';
 import { useTranslation, Trans } from 'react-i18next';
-import { validationObj } from '../../utils/authUtils/authUtils';
+import { validationObj } from '../../../utils/authUtils';
 import { useForm } from 'react-hook-form';
-
 import { Spinner } from 'phosphor-react';
-
 import { useLocation } from 'react-router';
+import { FormData } from '../../../types/auth';
+import AuthServerError from './serverError/AuthServerError';
 
 type Props = {
   onSubmitFormHandler: (data: FormData) => void;
   isError: boolean;
   isLoading: boolean;
-};
-
-type FormData = {
-  name: string;
-  login: string;
-  password: string;
+  errorMessage: string;
 };
 
 function AuthForm(props: Props) {
   const { t } = useTranslation();
+  const { pathname } = useLocation();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
 
-  const { pathname } = useLocation();
-
-  // Conditional rendering
   const type = pathname === '/signup' ? 'signUp' : 'logIn';
   const toPath = pathname === '/signup' ? '/login' : '/signup';
 
@@ -61,6 +47,7 @@ function AuthForm(props: Props) {
   return (
     <AuthContainer onSubmit={handleSubmit(props.onSubmitFormHandler)}>
       <Title>{t(`${type}.title`)} </Title>
+      {props.isError && <AuthServerError errorMessage={props.errorMessage} />}
       <Controls>
         {type === 'signUp' && (
           <Input
@@ -83,10 +70,14 @@ function AuthForm(props: Props) {
           label={t('signUp.password')}
         />
       </Controls>
-      {props.isError && <ServerErrorMessage>Error</ServerErrorMessage>}
-      <SubmitButton>
-        {props.isLoading ? <Spinner weight="bold" /> : t(`${type}.title`)}
-      </SubmitButton>
+
+      {props.isLoading ? (
+        <SubmitButton disabled>
+          <Spinner weight="bold" />
+        </SubmitButton>
+      ) : (
+        <SubmitButton>{t(`${type}.title`)}</SubmitButton>
+      )}
       <ToggleParagraph>{paragraph}</ToggleParagraph>
     </AuthContainer>
   );

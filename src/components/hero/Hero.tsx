@@ -1,6 +1,5 @@
-import { HeroContainer, Description, Headline, Title, Button, Img } from './Hero.styled';
+import { HeroContainer, Description, Headline, Title, Img, StyledLink } from './Hero.styled';
 import { useTranslation, Trans } from 'react-i18next';
-import { Link } from 'react-router-dom';
 
 function Hero() {
   const { t } = useTranslation();
@@ -14,10 +13,7 @@ function Hero() {
           </Trans>
         </Title>
         <Description>{t('hero.description')}</Description>
-        <Button>
-          {/* TODO This will depend if user is logged and will be implemented later */}
-          <Link to="/boards">{t('hero.getStarted')}</Link>{' '}
-        </Button>
+        <StyledLink to="/boards">{t('hero.getStarted')}</StyledLink>
       </Headline>
       <Img src="assets/hero-section.svg" alt="People using kanban board" />
     </HeroContainer>

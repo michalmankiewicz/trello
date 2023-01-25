@@ -1,19 +1,10 @@
 import { apiSlice } from '../../api/apiSlice';
-
-type CreateNewAccountType = {
-  name: string;
-  login: string;
-  password: string;
-};
-type getTokenType = {
-  login: string;
-  password: string;
-};
+import { FormData } from '../../types/auth';
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createNewAccount: builder.mutation({
-      query: (data: CreateNewAccountType) => ({
+      query: (data: FormData) => ({
         url: '/signup',
         method: 'POST',
         body: data,
@@ -23,7 +14,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     getToken: builder.mutation({
-      query: (data: getTokenType) => ({
+      query: (data: Omit<FormData, 'name'>) => ({
         url: '/signin',
         method: 'POST',
         body: data,

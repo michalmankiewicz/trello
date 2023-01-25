@@ -3,9 +3,9 @@ import { RootState } from '../store';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: 'http://127.0.0.1:4000/',
-  credentials: 'include',
-  prepareHeaders: async (headers, { getState }) => {
-    const token = await (getState() as RootState).auth.token;
+  prepareHeaders: (headers, { getState }) => {
+    const token = (getState() as RootState).auth.token;
+
     if (token) {
       headers.set('authorization', `Bearer ${token}`);
     }
@@ -15,5 +15,5 @@ const baseQuery = fetchBaseQuery({
 
 export const apiSlice = createApi({
   baseQuery: baseQuery,
-  endpoints: (builder) => ({}),
+  endpoints: () => ({}),
 });

@@ -8,13 +8,16 @@ import {
   LanguageButton,
   ActionsMobile,
 } from './Header.styled';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { List } from 'phosphor-react';
 import { useTranslation } from 'react-i18next';
-import { navLinkOptions } from '../../../../utils/navLinksUtils/navLinkUtils';
+import { useAppDispatch, useAppSelector } from '../../../../types/redux';
+import { logout as logoutFn } from '../../../../store/auth/authSlice';
 
 function Header() {
   const { i18n, t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const isAuth = useAppSelector((state) => state.auth.isAuth);
 
   const toggleLanguage = () => {
     if (i18n.language === 'en') i18n.changeLanguage('pl');
@@ -23,7 +26,6 @@ function Header() {
     closeMenu();
   };
 
-  // Mobile menu visibility
   const [isMenuOpened, setIsMenuOpened] = useState(false);
 
   const toggleMenu = () => {
@@ -34,24 +36,48 @@ function Header() {
     setIsMenuOpened(false);
   };
 
-  // Nav Links rendering
-  const { pathname: currentPath } = useLocation();
-  const navLinks = navLinkOptions.filter((link) => link.paths.some((el) => el === currentPath));
+  let content: JSX.Element;
+  if (isAuth) {
+    content = (
+      <>
+        <NavItem
+          onClick={() => {
+            closeMenu();
+            dispatch(logoutFn());
+          }}
+        >
+          <Link to="/">{t(`header.signOut`)}</Link>
+        </NavItem>
+        <NavItem onClick={closeMenu}>
+          <Link to="/boards">{t(`header.boards`)}</Link>
+        </NavItem>
+        <NavItem onClick={closeMenu}>
+          <Link to="/edit-profile">{t(`header.editProfile`)}</Link>
+        </NavItem>
+      </>
+    );
+  } else {
+    content = (
+      <>
+        <NavItem onClick={closeMenu}>
+          <Link to="/login">{t(`header.logIn`)}</Link>
+        </NavItem>
+        <NavItem onClick={closeMenu}>
+          <Link to="/signup">{t(`header.signUp`)}</Link>
+        </NavItem>
+      </>
+    );
+  }
 
   return (
     <HeaderContainer>
-      <Logo onClick={closeMenu}>
-        <Link to="/">Trello</Link>
+      <Logo onClick={closeMenu} to="/">
+        <img src="assets/kanban_logo.svg" />
+        <p>Trello</p>
       </Logo>
       <Menu isMenuOpened={isMenuOpened}>
         <nav>
-          <NavList>
-            {navLinks?.map((el) => (
-              <NavItem onClick={closeMenu} key={el.id}>
-                <Link to={el.toPath}>{t(`header.${el.id}`)}</Link>
-              </NavItem>
-            ))}
-          </NavList>
+          <NavList>{content}</NavList>
         </nav>
         <LanguageButton onClick={toggleLanguage}>{i18n.language.toUpperCase()}</LanguageButton>
       </Menu>

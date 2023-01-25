@@ -1,30 +1,41 @@
-import { useNavigate } from 'react-router-dom';
-import AuthForm from '../components/auth/AuthForm';
-
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import AuthForm from '../components/auth/authForm/AuthForm';
 import { useCreateNewAccountMutation, useGetTokenMutation } from '../store/auth/authApiSlice';
-
-type FormData = {
-  name: string;
-  login: string;
-  password: string;
-};
+import { useAppDispatch } from '../types/redux';
+import { login as loginFn } from '../store/auth/authSlice';
+import { handleErrorMessage } from '../utils/authUtils';
+import { FormData } from '../types/auth';
 
 function Auth() {
-  const [createNewAccount, { data: accountData }] = useCreateNewAccountMutation();
-  const [getToken, { data: tokenData, isError, isLoading }] = useGetTokenMutation();
+  const [createNewAccount, { isError: isSignUpError, isLoading: isSignUpLoading }] =
+    useCreateNewAccountMutation();
+  const [getToken, { isError: isLoginError, isLoading: isLoginLoading }] = useGetTokenMutation();
 
-  console.log(accountData, tokenData);
-  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { pathname } = useLocation();
+  const [errorMessage, setErrorMessage] = useState('');
 
   const submitFormHandler = async (data: FormData) => {
-    const { name, login, password } = data;
-    await createNewAccount(data);
-    await getToken({ login, password });
-    navigate('/boards');
+    try {
+      const { name, login, password } = data;
+      if (pathname === '/signup') await createNewAccount({ name, login, password }).unwrap();
+      const tokenData: { token: string } = await getToken({ login, password }).unwrap();
+
+      dispatch(loginFn(tokenData.token));
+    } catch (err) {
+      console.error(err);
+      setErrorMessage(handleErrorMessage(err));
+    }
   };
 
   return (
-    <AuthForm onSubmitFormHandler={submitFormHandler} isLoading={isLoading} isError={isError} />
+    <AuthForm
+      onSubmitFormHandler={submitFormHandler}
+      isLoading={isSignUpLoading || isLoginLoading}
+      isError={isSignUpError || isLoginError}
+      errorMessage={errorMessage}
+    />
   );
 }
 

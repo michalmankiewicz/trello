@@ -1,17 +1,19 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Hero from './Hero';
-import TestWrapper from '../../utils/testUtils/testUtils';
+import TestWrapper from '../../utils/testUtils';
 import userEvent from '@testing-library/user-event';
+
+beforeEach(() => {
+  render(
+    <TestWrapper>
+      <Hero />
+    </TestWrapper>
+  );
+});
 
 describe('Hero component', () => {
   test('renders Hero Component', () => {
-    render(
-      <TestWrapper>
-        <Hero />
-      </TestWrapper>
-    );
-
     // https://polvara.me/posts/five-things-you-didnt-know-about-testing-library
     //   Example 4
     //   Solution to get rid of span inside title
@@ -33,12 +35,6 @@ describe('Hero component', () => {
   });
 
   test('rendirect to boards page when Get started button is clicked', () => {
-    render(
-      <TestWrapper>
-        <Hero />
-      </TestWrapper>
-    );
-
     const getStartedBtn = screen.getByText('Get started');
 
     userEvent.click(getStartedBtn);
