@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import theme from '../../../../utils/styledCompentsUtils/theme';
-import { MEDIA_QUERIES } from '../../../../GlobalStyles';
+import theme from '../../../utils/styledCompentsUtils/theme';
+import { MEDIA_QUERIES } from '../../../GlobalStyles';
 
 export const ServerErrorMessage = styled.h3`
   margin-bottom: 2rem;

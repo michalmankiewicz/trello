@@ -43,10 +43,19 @@ i18next
             min: 'This field should have min 3 characters',
             max: 'This field should have max 10 characters',
           },
-          authServerError: {
+          serverError: {
             default: 'Something went wrong!',
             error403: 'Wrong login or password!',
+            error404: 'Board was not found!',
             error409: 'This username already exist!',
+          },
+          boards: {
+            title: 'Your boards',
+            deleteQuestion: 'Are you sure to delete this board?',
+            delete: 'Delete',
+            cancel: 'Cancel',
+            titleLabel: 'Title',
+            descriptionLabel: 'Description',
           },
         },
       },
@@ -84,10 +93,20 @@ i18next
             max: 'To pole powinno zawierać max 10 liter',
           },
 
-          authServerError: {
+          serverError: {
             default: 'Coś poszło nie tak!',
             error403: 'Niepoprawny login lub hasło!',
+            error404: 'Nie znaleziono tablicy!',
             error409: 'Ta nazwa użytkownika już istnieje',
+          },
+
+          boards: {
+            title: 'Twoje tablice',
+            deleteQuestion: 'Jesteś pewien, że chcesz usunąć tą tablicę?',
+            delete: 'Usuń',
+            cancel: 'Anuluj',
+            titleLabel: 'Tytuł',
+            descriptionLabel: 'Opis',
           },
         },
       },

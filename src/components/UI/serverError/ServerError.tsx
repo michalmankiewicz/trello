@@ -1,5 +1,5 @@
 import React from 'react';
-import { ServerErrorMessage } from './AuthServerError.styled';
+import { ServerErrorMessage } from './ServerError.styled';
 import { WarningCircle } from 'phosphor-react';
 import { useTranslation } from 'react-i18next';
 
@@ -7,7 +7,7 @@ type Props = {
   errorMessage: string;
 };
 
-function AuthServerError(props: Props) {
+function ServerError(props: Props) {
   const { t } = useTranslation();
 
   return (
@@ -18,4 +18,4 @@ function AuthServerError(props: Props) {
   );
 }
 
-export default AuthServerError;
+export default ServerError;

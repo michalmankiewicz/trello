@@ -1,15 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import TestWrapper from '../../../utils/testUtils';
+import ServerError from './ServerError';
 
-import TestWrapper from '../../../../utils/testUtils';
-
-import AuthServerError from './AuthServerError';
-
-describe('AuthServerError component', () => {
+describe('serverError component', () => {
   test('Renders error', () => {
     render(
       <TestWrapper>
-        <AuthServerError errorMessage={'authServerError.default'} />
+        <ServerError errorMessage={'serverError.default'} />
       </TestWrapper>
     );
 

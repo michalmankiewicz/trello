@@ -23,10 +23,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         },
       }),
     }),
-    getBoards: builder.query({
-      query: () => '/boards',
-    }),
   }),
 });
 
-export const { useCreateNewAccountMutation, useGetTokenMutation, useGetBoardsQuery } = authApiSlice;
+export const { useCreateNewAccountMutation, useGetTokenMutation } = authApiSlice;

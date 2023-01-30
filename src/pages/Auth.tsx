@@ -4,7 +4,7 @@ import AuthForm from '../components/auth/authForm/AuthForm';
 import { useCreateNewAccountMutation, useGetTokenMutation } from '../store/auth/authApiSlice';
 import { useAppDispatch } from '../types/redux';
 import { login as loginFn } from '../store/auth/authSlice';
-import { handleErrorMessage } from '../utils/authUtils';
+import { handleErrorMessage } from '../utils/errorUtils';
 import { FormData } from '../types/auth';
 
 function Auth() {

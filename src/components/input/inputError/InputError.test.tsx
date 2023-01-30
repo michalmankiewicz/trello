@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import TestWrapper from '../../../utils/testUtils';
 import InputErrorMessage from './InputErrorMessage';
 
-describe('AuthServerError component', () => {
+describe('serverError component', () => {
   test('Renders error', () => {
     render(
       <TestWrapper>

@@ -1,4 +1,4 @@
-import { MEDIA_QUERIES } from '../../../GlobalStyles';
+import { GlobalControls, MEDIA_QUERIES, SubmitButton } from '../../../GlobalStyles';
 import styled from '../../../utils/styledCompentsUtils/styled-components';
 import theme from '../../../utils/styledCompentsUtils/theme';
 import { spin } from '../../../utils/styledCompentsUtils/animations';
@@ -33,11 +33,8 @@ export const Title = styled.h3`
   }
 `;
 
-export const Controls = styled.fieldset`
-  display: flex;
-  flex-direction: column;
+export const Controls = styled(GlobalControls)`
   gap: 20px;
-  border: none;
   margin-bottom: 2.4rem;
 
   @media (max-width: ${MEDIA_QUERIES.w44}) {
@@ -45,20 +42,9 @@ export const Controls = styled.fieldset`
   }
 `;
 
-export const SubmitButton = styled.button`
-  border: none;
-  background-color: ${theme.colors.primary};
-  color: ${theme.colors.white};
+export const AuthSubmitButton = styled(SubmitButton)`
   width: 100%;
-  padding: 1.6rem 3.2rem;
-  font-size: 2rem;
-  border-radius: ${theme.borderRadius};
   margin-bottom: 1.6rem;
-
-  &:hover {
-    cursor: pointer;
-    background-color: ${theme.colors.primaryShaded};
-  }
 
   &:disabled {
     cursor: not-allowed;

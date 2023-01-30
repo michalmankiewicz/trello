@@ -4,7 +4,7 @@ import '@testing-library/jest-dom';
 import TestWrapper from '../../utils/testUtils';
 import Input from './Input';
 
-describe('AuthServerError component', () => {
+describe('serverError component', () => {
   test('Renders error', () => {
     render(
       <TestWrapper>

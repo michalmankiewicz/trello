@@ -1,13 +1,19 @@
 import { Link } from 'react-router-dom';
 import Input from '../../input/Input';
-import { AuthContainer, Controls, SubmitButton, Title, ToggleParagraph } from './AuthForm.styled';
+import {
+  AuthContainer,
+  Controls,
+  AuthSubmitButton,
+  Title,
+  ToggleParagraph,
+} from './AuthForm.styled';
 import { useTranslation, Trans } from 'react-i18next';
 import { validationObj } from '../../../utils/authUtils';
 import { useForm } from 'react-hook-form';
 import { Spinner } from 'phosphor-react';
 import { useLocation } from 'react-router';
 import { FormData } from '../../../types/auth';
-import AuthServerError from './serverError/AuthServerError';
+import ServerError from '../../UI/serverError/ServerError';
 
 type Props = {
   onSubmitFormHandler: (data: FormData) => void;
@@ -47,7 +53,7 @@ function AuthForm(props: Props) {
   return (
     <AuthContainer onSubmit={handleSubmit(props.onSubmitFormHandler)}>
       <Title>{t(`${type}.title`)} </Title>
-      {props.isError && <AuthServerError errorMessage={props.errorMessage} />}
+      {props.isError && <ServerError errorMessage={props.errorMessage} />}
       <Controls>
         {type === 'signUp' && (
           <Input
@@ -72,11 +78,11 @@ function AuthForm(props: Props) {
       </Controls>
 
       {props.isLoading ? (
-        <SubmitButton disabled>
+        <AuthSubmitButton disabled>
           <Spinner weight="bold" />
-        </SubmitButton>
+        </AuthSubmitButton>
       ) : (
-        <SubmitButton>{t(`${type}.title`)}</SubmitButton>
+        <AuthSubmitButton>{t(`${type}.title`)}</AuthSubmitButton>
       )}
       <ToggleParagraph>{paragraph}</ToggleParagraph>
     </AuthContainer>
