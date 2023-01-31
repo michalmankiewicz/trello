@@ -2,17 +2,14 @@ import styled from 'styled-components';
 import theme from '../../../utils/styledCompentsUtils/theme';
 import { MEDIA_QUERIES } from '../../../GlobalStyles';
 
-export const ServerErrorMessage = styled.h3`
+export const ServerErrorContainer = styled.div`
   margin-bottom: 2rem;
   border-radius: ${theme.borderRadius};
   display: flex;
   align-items: center;
   gap: 1rem;
   padding: 1rem 2rem;
-  font-size: 1.6rem;
   background-color: ${theme.colors.errorBgRed};
-  color: ${theme.colors.errorFontBlack};
-  text-align: center;
 
   & svg {
     color: ${theme.colors.errorRed};
@@ -29,4 +26,10 @@ export const ServerErrorMessage = styled.h3`
       font-size: 3.6rem;
     }
   }
+`;
+
+export const ServerErrorMessage = styled.h3`
+  font-size: 1.6rem;
+  color: ${theme.colors.errorFontBlack};
+  text-align: center;
 `;

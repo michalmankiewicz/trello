@@ -1,5 +1,5 @@
 import React from 'react';
-import { ServerErrorMessage } from './ServerError.styled';
+import { ServerErrorContainer, ServerErrorMessage } from './ServerError.styled';
 import { WarningCircle } from 'phosphor-react';
 import { useTranslation } from 'react-i18next';
 
@@ -11,10 +11,10 @@ function ServerError(props: Props) {
   const { t } = useTranslation();
 
   return (
-    <ServerErrorMessage>
+    <ServerErrorContainer>
       <WarningCircle weight="bold" />
-      {t(props.errorMessage)}
-    </ServerErrorMessage>
+      <ServerErrorMessage>{t(props.errorMessage)}</ServerErrorMessage>
+    </ServerErrorContainer>
   );
 }
 

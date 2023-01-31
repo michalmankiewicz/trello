@@ -1,29 +1,24 @@
 import { apiSlice } from '../../api/apiSlice';
-import { FormData } from '../../types/auth';
+import { LogInData, SignUpData } from '../../types/auth';
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createNewAccount: builder.mutation({
-      query: (data: FormData) => ({
+      query: (data: SignUpData) => ({
         url: '/signup',
         method: 'POST',
         body: data,
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
       }),
     }),
     getToken: builder.mutation({
-      query: (data: Omit<FormData, 'name'>) => ({
+      query: (data: LogInData) => ({
         url: '/signin',
         method: 'POST',
         body: data,
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
       }),
     }),
+    getUser: builder.query({ query: (id: string | undefined) => `/users/${id}` }),
   }),
 });
 
-export const { useCreateNewAccountMutation, useGetTokenMutation } = authApiSlice;
+export const { useCreateNewAccountMutation, useGetTokenMutation, useGetUserQuery } = authApiSlice;

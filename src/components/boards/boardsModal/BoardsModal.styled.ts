@@ -10,7 +10,7 @@ export const LoadingOverlay = styled.div`
   height: 100%;
   z-index: 20;
   background-color: rgba(0, 0, 0, 0.2);
-  color: ${theme.colors.grey1};
+  color: ${theme.colors.greyDark};
   display: flex;
   align-items: center;
   justify-content: center;

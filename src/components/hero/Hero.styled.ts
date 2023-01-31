@@ -39,7 +39,7 @@ export const Title = styled.h1`
 `;
 export const Description = styled.p`
   font-size: 2.6rem;
-  color: ${theme.colors.grey1};
+  color: ${theme.colors.greyDark};
 
   @media (max-width: ${MEDIA_QUERIES.w50}) {
     font-size: 2.4rem;

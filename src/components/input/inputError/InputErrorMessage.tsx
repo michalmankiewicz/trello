@@ -2,9 +2,9 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ErrorMessage } from './InputErrorMessage.styled';
 
-export interface Props {
+type Props = {
   errorMessage: string;
-}
+};
 
 function InputErrorMessage(props: Props) {
   const { t } = useTranslation();

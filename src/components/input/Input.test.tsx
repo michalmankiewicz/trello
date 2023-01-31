@@ -4,11 +4,11 @@ import '@testing-library/jest-dom';
 import TestWrapper from '../../utils/testUtils';
 import Input from './Input';
 
-describe('serverError component', () => {
-  test('Renders error', () => {
+describe('Input component', () => {
+  test('Renders input', () => {
     render(
       <TestWrapper>
-        <Input error={undefined} label="Name" />
+        <Input label="Name" />
       </TestWrapper>
     );
 
