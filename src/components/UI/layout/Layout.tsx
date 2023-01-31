@@ -3,10 +3,15 @@ import Header from './header/Header';
 import Main from './main/Main';
 import { LayoutContainer } from './Layout.styled';
 
-function Layout(props: React.PropsWithChildren) {
+type Props = {
+  isLoading: boolean;
+  children: JSX.Element;
+};
+
+function Layout(props: Props) {
   return (
     <LayoutContainer>
-      <Header />
+      <Header isLoading={props.isLoading} />
       <Main>{props.children}</Main>
     </LayoutContainer>
   );

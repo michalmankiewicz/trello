@@ -75,7 +75,7 @@ export const ToggleParagraph = styled.p`
   font-size: 1.6rem;
   text-align: center;
   padding: 1rem 0 0 0;
-  border-top: 2px solid ${theme.colors.grey3};
+  border-top: 2px solid ${theme.colors.greyLight};
 
   & a {
     color: ${theme.colors.primary};

@@ -18,8 +18,6 @@ export const handleErrorMessage = (error: unknown): string => {
 
   let errorMessage = '';
   if (error && typeof error === 'object' && 'status' in error) {
-    console.log('trigered', error.status);
-
     if (error.status === 400) {
       errorMessage = defaultMessage;
     } else if (error.status === 403) {

@@ -5,7 +5,7 @@ import { MenuProps } from './Header.types';
 import { Link } from 'react-router-dom';
 
 const mobileHeaderHigh = '7rem';
-const menuGap = '2rem';
+export const menuGap = '2rem';
 
 export const HeaderContainer = styled.header`
   position: relative;

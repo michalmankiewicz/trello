@@ -8,7 +8,7 @@ export const InputContainer = styled.div`
 
 export const Label = styled.label`
   position: absolute;
-  color: ${theme.colors.grey2};
+  color: ${theme.colors.greyMedium};
   background-color: ${theme.colors.white};
   left: 5%;
   top: -10px;
@@ -19,7 +19,7 @@ export const Label = styled.label`
 export const InputField = styled.input`
   width: 100%;
   border-radius: ${theme.borderRadius};
-  border: 3px solid ${theme.colors.grey3};
+  border: 3px solid ${theme.colors.greyLight};
   font-size: 2rem;
   padding: 1.2rem 2.4rem;
   margin-bottom: 0.4rem;

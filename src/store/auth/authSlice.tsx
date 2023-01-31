@@ -1,20 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import jwt_decode from 'jwt-decode';
+import { User } from '../../types/auth';
 
 type AuthSliceType = {
   token: string;
   isAuth: boolean;
-  user: {
-    userId: string;
-    iat: number;
-    login: string;
-  } | null;
+  user: User;
 };
 
 const initialAuthState: AuthSliceType = {
   token: localStorage.getItem('token') ?? '',
-  isAuth: !!localStorage.getItem('token'),
+  isAuth: false,
   user: JSON.parse(localStorage.getItem('user') || '{}'),
 };
 
@@ -22,24 +18,21 @@ const authSlice = createSlice({
   name: 'auth',
   initialState: initialAuthState,
   reducers: {
-    login: (state, action: PayloadAction<string>) => {
+    setCredentials: (state, action: PayloadAction<{ token: string; user: User }>) => {
       state.isAuth = true;
-      state.token = action.payload;
-      const user = jwt_decode(action.payload);
-
-      localStorage.setItem('token', action.payload);
-      localStorage.setItem('user', JSON.stringify(user));
+      state.token = action.payload.token;
+      state.user = action.payload.user;
     },
-    logout: (state) => {
+    resetCredentials: (state) => {
       state.isAuth = false;
       state.token = '';
       state.user = null;
-
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
+    },
+    validateUser: (state) => {
+      state.isAuth = true;
     },
   },
 });
 
-export const { login, logout } = authSlice.actions;
+export const { setCredentials, resetCredentials, validateUser } = authSlice.actions;
 export default authSlice.reducer;

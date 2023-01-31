@@ -8,7 +8,7 @@ beforeEach(() => {
   history.pushState({}, '', '/');
   render(
     <TestWrapper>
-      <Header />
+      <Header isLoading={false} />
     </TestWrapper>
   );
 });
