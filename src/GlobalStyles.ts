@@ -11,9 +11,6 @@ const GlobalStyles = createGlobalStyle`
   html{
     font-size: 62.5%;
   }
-  body{
-
-  }
 `;
 
 export const MEDIA_QUERIES = {

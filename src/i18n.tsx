@@ -6,7 +6,7 @@ i18next
   .use(initReactI18next)
   .use(LanguageDetector)
   .init({
-    debug: true,
+    debug: false,
     fallbackLng: 'en',
     resources: {
       en: {
@@ -21,7 +21,32 @@ i18next
             logIn: 'Log in',
             signUp: 'Sign up',
             signOut: 'Sign out',
+            boards: 'Boards',
             editProfile: 'Edit profile',
+          },
+          logIn: {
+            title: 'Log in',
+            name: 'Name',
+            password: 'Password',
+            toggleText: `Don't have account yet? <1>Register</1>`,
+          },
+
+          signUp: {
+            title: 'Sign up',
+            name: 'Name',
+            password: 'Password',
+            toggleText: 'Already have an account? <1>Sign in</1>',
+          },
+
+          inputError: {
+            required: 'This field is required',
+            min: 'This field should have min 3 characters',
+            max: 'This field should have max 10 characters',
+          },
+          authServerError: {
+            default: 'Something went wrong!',
+            error403: 'Wrong login or password!',
+            error409: 'This username already exist!',
           },
         },
       },
@@ -37,7 +62,32 @@ i18next
             logIn: 'Zaloguj się',
             signUp: 'Zarejestruj się',
             signOut: 'Wyloguj się',
+            boards: 'Tablice',
             editProfile: 'Edytuj profil',
+          },
+          logIn: {
+            title: 'Zaloguj się',
+            name: 'Nazwa',
+            password: 'Hasło',
+            toggleText: `Nie posiadasz konta? <1>Zarejestruj się</1>`,
+          },
+
+          signUp: {
+            title: 'Zarejestruj się',
+            name: 'Nazwa',
+            password: 'Hasło',
+            toggleText: 'Posiadasz już konto? <1>Zaloguj się</1>',
+          },
+          inputError: {
+            required: 'To pole jest wymagane',
+            min: 'To pole powinno zawierać min 3 litery',
+            max: 'To pole powinno zawierać max 10 liter',
+          },
+
+          authServerError: {
+            default: 'Coś poszło nie tak!',
+            error403: 'Niepoprawny login lub hasło!',
+            error409: 'Ta nazwa użytkownika już istnieje',
           },
         },
       },
@@ -48,5 +98,4 @@ i18next
       escapeValue: false,
     },
   });
-
 export default i18next;

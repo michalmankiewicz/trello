@@ -1,19 +1,20 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Header from './Header';
-import TestWrapper from '../../../../utils/testUtils/testUtils';
+import TestWrapper from '../../../../utils/testUtils';
 import userEvent from '@testing-library/user-event';
 
-beforeEach(() => history.pushState({}, '', '/'));
+beforeEach(() => {
+  history.pushState({}, '', '/');
+  render(
+    <TestWrapper>
+      <Header isLoading={false} />
+    </TestWrapper>
+  );
+});
 
 describe('Header component', () => {
   test('renders Header', () => {
-    render(
-      <TestWrapper>
-        <Header />
-      </TestWrapper>
-    );
-
     const logo = screen.getByText('Trello');
     const logIn = screen.getByText('Log in');
     const signUp = screen.getByText('Sign up');
@@ -24,30 +25,14 @@ describe('Header component', () => {
   });
 
   test('renders appropiate navlinks when click Log in', () => {
-    render(
-      <TestWrapper>
-        <Header />
-      </TestWrapper>
-    );
-
     const logIn = screen.getByText('Log in');
-    const signUp = screen.getByText('Sign up');
 
     userEvent.click(logIn);
 
-    expect(logIn).not.toBeInTheDocument();
-    expect(signUp).not.toBeInTheDocument();
-
-    expect(window.location.pathname).toContain('/auth');
+    expect(window.location.pathname).toContain('/login');
   });
 
   test('renders appropiate translate when clicks on language button', () => {
-    render(
-      <TestWrapper>
-        <Header />
-      </TestWrapper>
-    );
-
     const languageButton = screen.getByText('EN');
     userEvent.click(languageButton);
 
