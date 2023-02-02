@@ -15,8 +15,6 @@ describe('BoardsList component', () => {
             { id: '2', title: 'Title', description: 'Description' },
           ]}
           onUpdateBoards={() => {}}
-          isLoading={false}
-          isError={false}
         />
       </TestWrapper>
     );
@@ -36,8 +34,6 @@ describe('BoardsList component', () => {
             { id: '2', title: 'Title', description: 'Description' },
           ]}
           onUpdateBoards={() => {}}
-          isLoading={false}
-          isError={true}
         />
       </TestWrapper>
     );

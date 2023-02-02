@@ -1,14 +1,24 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import BoardsList from '../components/boards/boardList/BoardsList';
-import BoardsModal from '../components/boards/boardsModal/BoardsModal';
+import BoardsModal from '../components/boards/boardsModal/BoardsUpdateModal';
 import useModal from '../hooks/useModal';
+import { selectToken } from '../store/auth/authSelectors';
 import { useGetBoardsQuery } from '../store/boards/boardsApiSlice';
+import { setError } from '../store/status/statusSlice';
+
 import { Board, updateTypes } from '../types/boards';
-import { useAppSelector } from '../types/redux';
+import { useAppDispatch, useAppSelector } from '../types/redux';
 
 function Boards() {
-  const token = useAppSelector((state) => state.auth.token);
-  const { data, isLoading, isError } = useGetBoardsQuery(token);
+  const token = useAppSelector(selectToken);
+  const { data, isError } = useGetBoardsQuery(token);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (isError) {
+      dispatch(setError('Something went wrong'));
+    }
+  }, [dispatch, isError]);
 
   const { isShowing: isModalOpen, openModal, closeModal } = useModal();
   const [modalStatus, setModalStatus] = useState<updateTypes | undefined>();
@@ -25,12 +35,7 @@ function Boards() {
 
   return (
     <>
-      <BoardsList
-        onUpdateBoards={updateBoards}
-        boards={data}
-        isLoading={isLoading}
-        isError={isError}
-      />
+      <BoardsList onUpdateBoards={updateBoards} boards={data} />
       {isModalOpen && (
         <BoardsModal closeModal={closeModal} type={modalStatus} boardData={chosenBoardData} />
       )}

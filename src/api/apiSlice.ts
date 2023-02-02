@@ -15,6 +15,9 @@ const baseQuery = fetchBaseQuery({
 
 export const apiSlice = createApi({
   baseQuery: baseQuery,
-  tagTypes: ['Boards'],
+  tagTypes: ['Boards', 'Columns', 'Tasks'],
   endpoints: () => ({}),
 });
+
+export const allPendingSelector = (state: RootState) =>
+  Object.values(state.api.queries).some((query) => query!.status === 'pending');

@@ -51,7 +51,7 @@ i18next
           },
           boards: {
             title: 'Your boards',
-            deleteQuestion: 'Are you sure to delete this board?',
+            deleteQuestion: 'Are you sure to want to delete this?',
             delete: 'Delete',
             cancel: 'Cancel',
             titleLabel: 'Title',
@@ -102,7 +102,7 @@ i18next
 
           boards: {
             title: 'Twoje tablice',
-            deleteQuestion: 'Jesteś pewien, że chcesz usunąć tą tablicę?',
+            deleteQuestion: 'Jesteś pewien, że chcesz to usunąć?',
             delete: 'Usuń',
             cancel: 'Anuluj',
             titleLabel: 'Tytuł',

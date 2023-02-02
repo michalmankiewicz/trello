@@ -3,7 +3,7 @@ import theme from '../../../utils/styledCompentsUtils/theme';
 import { MEDIA_QUERIES } from '../../../GlobalStyles';
 
 export const ServerErrorContainer = styled.div`
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
   border-radius: ${theme.borderRadius};
   display: flex;
   align-items: center;

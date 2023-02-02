@@ -15,7 +15,7 @@ function BoardItem(props: Props) {
   const navigate = useNavigate();
 
   return (
-    <BoardContainer onClick={() => navigate(`boards/${props.id}`)}>
+    <BoardContainer onClick={() => navigate(`${props.id}`)}>
       <div>
         <Title>{props.title}</Title>
         <Description>{props.description}</Description>

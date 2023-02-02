@@ -12,9 +12,6 @@ export const authApiSlice = apiSlice.injectEndpoints({
         url: 'boards',
         method: 'POST',
         body: data,
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
       }),
       invalidatesTags: ['Boards'],
     }),
@@ -33,16 +30,18 @@ export const authApiSlice = apiSlice.injectEndpoints({
           title: data.title,
           description: data.description,
         },
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
       }),
       invalidatesTags: ['Boards'],
+    }),
+    getBoardWithDetails: builder.query({
+      query: (boardId: string) => `/boards/${boardId}`,
+      providesTags: ['Boards', 'Columns', 'Tasks'],
     }),
   }),
 });
 
 export const {
+  useGetBoardWithDetailsQuery,
   useGetBoardsQuery,
   useAddBoardMutation,
   useDeleteBoardMutation,

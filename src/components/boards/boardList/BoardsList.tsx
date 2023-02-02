@@ -4,15 +4,11 @@ import './BoardsList.styled';
 import { BoardsContainer, Title, List, NewBoard } from './BoardsList.styled';
 import { Plus } from 'phosphor-react';
 import { Board, updateTypes, UPDATE_TYPES } from '../../../types/boards';
-import LoadingSpinner from '../../UI/loadingSpinner/LoadingSpinner';
-import ServerError from '../../UI/serverError/ServerError';
 import { useTranslation } from 'react-i18next';
 
 type Props = {
   onUpdateBoards: (type: updateTypes, board?: Board) => void;
   boards: Board[] | undefined;
-  isLoading: boolean;
-  isError: boolean;
 };
 
 function BoardsList(props: Props) {
@@ -21,7 +17,6 @@ function BoardsList(props: Props) {
   return (
     <BoardsContainer>
       <Title>{t('boards.title')}</Title>
-      {props.isLoading && <LoadingSpinner />}
       {props.boards && (
         <List>
           {props?.boards?.map((board) => (
@@ -39,7 +34,6 @@ function BoardsList(props: Props) {
           </NewBoard>
         </List>
       )}
-      {props.isError && <ServerError errorMessage="serverError.default" />}
     </BoardsContainer>
   );
 }

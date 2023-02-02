@@ -11,8 +11,8 @@ type ModalOverlayProps = {
 const ModalOverlay = (props: ModalOverlayProps) => {
   return (
     <>
-      <Backdrop onClick={props.hideModal} />
       <ModalContainer>{props.children}</ModalContainer>
+      <Backdrop onClick={props.hideModal} />
     </>
   );
 };
