@@ -42,14 +42,12 @@ function App() {
       <Layout isLoading={isLoading}>
         <Routes>
           <Route path="/" element={<Homepage />} />
-
           {!isAuth && (
             <>
               <Route path="/signup" element={<SignUp />} />
               <Route path="/login" element={<LogIn />} />
             </>
           )}
-
           {isAuth && (
             <>
               <Route path="/boards" element={<Boards />} />
