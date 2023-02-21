@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import theme from '../../../utils/styledCompentsUtils/theme';
+import { ColumnContianerProps } from './ColumnItem.type';
 
-export const ColumnContainer = styled.li`
-  background-color: ${theme.colors.primary};
+export const ColumnContainer = styled.li<ColumnContianerProps>`
+  background-color: ${(p) =>
+    p.isTaskOverContainer ? theme.colors.primaryShadedDarker : theme.colors.primary};
   opacity: 1;
   list-style: none;
   min-width: 30rem;
@@ -11,12 +13,9 @@ export const ColumnContainer = styled.li`
   border-radius: ${theme.borderRadius};
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.144);
   padding: 2rem;
-
-  /* nie wiem */
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
-  /* justify-content: space-between; */
 
   &:hover {
     cursor: pointer;

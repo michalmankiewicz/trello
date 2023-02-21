@@ -1,14 +1,13 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import Header from './header/Header';
 import Main from './main/Main';
 import { LayoutContainer } from './Layout.styled';
 
 type Props = {
   isLoading: boolean;
-  children: JSX.Element;
 };
 
-function Layout(props: Props) {
+function Layout(props: PropsWithChildren<Props>) {
   return (
     <LayoutContainer>
       <Header isLoading={props.isLoading} />

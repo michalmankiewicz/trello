@@ -11,10 +11,6 @@ export type NewColumn = {
   title: string;
 };
 
-export type NewColumnPayload = {
-  title: string;
-};
-
 export type EditColumnPayload = {
   title: string;
   order: number;

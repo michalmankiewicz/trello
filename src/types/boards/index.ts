@@ -10,6 +10,7 @@ export type NewBoard = {
 
 export type updateTypes = 'add' | 'delete' | 'edit';
 
+// TODO
 export const UPDATE_TYPES: {
   add: 'add';
   delete: 'delete';

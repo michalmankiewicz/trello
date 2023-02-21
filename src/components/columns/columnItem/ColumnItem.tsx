@@ -1,3 +1,4 @@
+import { useSortable } from '@dnd-kit/sortable';
 import { Trash } from 'phosphor-react';
 import React, { Dispatch, useRef } from 'react';
 import { useEditColumnMutation } from '../../../store/columns/columnsApiSlice';
@@ -7,6 +8,7 @@ import { Task } from '../../../types/tasks';
 import { handleErrorMessage } from '../../../utils/errorUtils';
 import TaskList from '../../tasks/taskList/TaskList';
 import { ColumnContainer, Actions, Title, ActionButton, Input } from './ColumnItem.styled';
+import { CSS } from '@dnd-kit/utilities';
 
 type Props = {
   title: string;
@@ -15,11 +17,28 @@ type Props = {
   order: number;
   tasks: Task[];
   onDeleteColumn: () => void;
-  isColumnEditing: string;
-  setIsColumnEditing: Dispatch<string>;
+  isColumnEditing: string | null;
+  toggleEditing: (id: string | null) => void;
 };
 
 function ColumnItem(props: Props) {
+  const { attributes, listeners, setNodeRef, transform, transition, over, active } = useSortable({
+    id: props.id,
+    data: {
+      type: 'column',
+      order: props.order,
+    },
+  });
+
+  const isTaskOverContainer =
+    (over?.data?.current?.columnId === props.id || over?.id === props.id) &&
+    active?.data?.current?.type === 'task';
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
   const dispatch = useAppDispatch();
   const [editColumn] = useEditColumnMutation();
 
@@ -45,11 +64,17 @@ function ColumnItem(props: Props) {
       const errorMessage = handleErrorMessage(err);
       dispatch(setError(errorMessage));
     }
-    props.setIsColumnEditing('');
+    props.toggleEditing(null);
   };
 
   return (
-    <ColumnContainer>
+    <ColumnContainer
+      isTaskOverContainer={isTaskOverContainer}
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+    >
       <Actions>
         {props.isColumnEditing === props.id ? (
           <form onSubmit={editHandler}>
@@ -58,16 +83,16 @@ function ColumnItem(props: Props) {
               autoFocus={true}
               ref={inputRef}
               defaultValue={props.title}
-              onBlur={() => props.setIsColumnEditing('')}
+              onBlur={() => props.toggleEditing(null)}
             />
           </form>
         ) : (
           <Title
             onClick={() => {
-              props.setIsColumnEditing(props.id);
+              props.toggleEditing(props.id);
             }}
           >
-            {props.title}, {props.order}
+            {props.title}
           </Title>
         )}
         <ActionButton onClick={props.onDeleteColumn}>

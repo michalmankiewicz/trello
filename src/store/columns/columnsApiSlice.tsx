@@ -1,10 +1,11 @@
 import { apiSlice } from '../../api/apiSlice';
-import { EditColumnPayload, NewColumnPayload } from '../../types/columns';
+import { Column, EditColumnPayload, NewColumn } from '../../types/columns';
+import { reorderTasks } from '../../utils/tasksUtils';
 
 export const columnApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     addColumn: builder.mutation({
-      query: (data: { boardId: string; body: NewColumnPayload }) => ({
+      query: (data: { boardId: string; body: NewColumn }) => ({
         url: `/boards/${data.boardId}/columns`,
         method: 'POST',
         body: data.body,
@@ -27,7 +28,43 @@ export const columnApiSlice = apiSlice.injectEndpoints({
           order: data.body.order,
         },
       }),
-      invalidatesTags: ['Columns'],
+      async onQueryStarted(data, { dispatch, queryFulfilled }) {
+        const patchResult = dispatch(
+          // TODO
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          apiSlice.util.updateQueryData<string>(
+            'getBoardWithDetails',
+            data.boardId,
+            (draft: { columns: Column[] }) => {
+              const columns = draft.columns;
+
+              const editedColumn = columns.find((el) => el.id === data.columnId);
+              const columnIndex = columns.findIndex((el) => el.id === data.columnId);
+
+              if (!editedColumn || columnIndex === undefined) return;
+
+              columns.splice(columnIndex as number, 1);
+
+              const prevOrder = editedColumn.order;
+              const { title, order: newOrder } = data.body;
+
+              reorderTasks(columns, prevOrder, newOrder);
+
+              columns.push({
+                ...editedColumn,
+                order: newOrder,
+                title: title,
+              });
+            }
+          )
+        );
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+        }
+      },
     }),
   }),
 });

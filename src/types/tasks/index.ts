@@ -14,11 +14,20 @@ export type NewTaskPayload = {
   description: string;
 };
 
+export type NewTaskURLData = { boardId: string; columnId: string };
+
+export type DeleteTaskURLData = { boardId: string; columnId: string; taskId: string };
+
 export type EditTaskPayload = {
   title: string;
   order: number;
   description: string;
   userId: string;
-  // boardId: string;
-  // columnId: string;
+};
+
+export type EditTaskURLData = {
+  boardId: string;
+  columnId: string;
+  changedColumnId?: string;
+  taskId: string;
 };

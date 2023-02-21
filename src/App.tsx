@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from './types/redux';
 import { useGetUserQuery } from './store/auth/authApiSlice';
 import { useEffect } from 'react';
 import { validateUser } from './store/auth/authSlice';
-import { selectisAuth, selectUser } from './store/auth/authSelectors';
+import { selectIsAuth, selectUser } from './store/auth/authSelectors';
 import SignUp from './pages/SignUp';
 import LogIn from './pages/LogIn';
 import Columns from './pages/Columns';
@@ -22,7 +22,7 @@ import { allPendingSelector } from './api/apiSlice';
 
 function App() {
   const user = useAppSelector(selectUser);
-  const isAuth = useAppSelector(selectisAuth);
+  const isAuth = useAppSelector(selectIsAuth);
   const globalIsLoading = useAppSelector(allPendingSelector);
   const globalIsError = useAppSelector(selectIsError);
   const dispatch = useAppDispatch();

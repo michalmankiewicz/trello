@@ -24,9 +24,6 @@ export const Input = styled.input`
   width: 90%;
   border-radius: 5px;
   border: 3px solid ${theme.colors.primary};
-
-  &:focus {
-  }
 `;
 
 export const ActionButton = styled.button`

@@ -1,3 +1,5 @@
+import { SortableContext } from '@dnd-kit/sortable';
+import { verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { Plus } from 'phosphor-react';
 import React, { memo, useCallback, useMemo, useState } from 'react';
 import useModal from '../../../hooks/useModal';
@@ -14,7 +16,7 @@ type Props = {
 };
 
 function TaskList(props: Props) {
-  const [isEditing, setIsEditing] = useState('');
+  const [isEditing, setIsEditing] = useState<string | null>(null);
 
   // Modal logic
   const { isShowing: isModalOpen, openModal, closeModal } = useModal();
@@ -23,8 +25,8 @@ function TaskList(props: Props) {
   const [taskId, setTaskId] = useState<string | undefined>();
 
   const updateTasks = useCallback(
-    (type: updateTypes | undefined, id?: string) => {
-      setModalStatus(type);
+    (actionType: updateTypes | undefined, id?: string) => {
+      setModalStatus(actionType);
       setTaskId(id);
       openModal();
     },
@@ -34,37 +36,44 @@ function TaskList(props: Props) {
   const sortedTasks = useMemo(() => {
     if (!props) return;
 
-    const newArray = [...props.tasks];
+    const tasks = [...props.tasks];
 
-    return newArray.sort((a: Task, b: Task) => a.order - b.order);
+    return tasks.sort((a: Task, b: Task) => a.order - b.order);
   }, [props]);
 
   return (
     <>
-      <TaskListContainer>
-        {sortedTasks?.map((task) => (
-          <TaskItem
-            onDeleteTask={() => {
-              updateTasks('delete', task.id);
+      <SortableContext
+        id={props.columnId}
+        items={sortedTasks?.map((task) => task.id) ?? []}
+        strategy={verticalListSortingStrategy}
+      >
+        <TaskListContainer>
+          {sortedTasks?.map((task) => (
+            <TaskItem
+              onDeleteTask={() => {
+                updateTasks('delete', task.id);
+              }}
+              isEditing={isEditing}
+              toggleEditing={setIsEditing}
+              key={task.id}
+              title={task.title}
+              id={task.id}
+              order={task.order}
+              boardId={props.boardId}
+              columnId={props.columnId}
+            />
+          ))}
+
+          <NewTask
+            onClick={() => {
+              updateTasks('add');
             }}
-            isEditing={isEditing}
-            setIsEditing={setIsEditing}
-            key={task.id}
-            title={task.title}
-            id={task.id}
-            order={task.order}
-            boardId={props.boardId}
-            columnId={props.columnId}
-          />
-        ))}
-        <NewTask
-          onClick={() => {
-            updateTasks('add');
-          }}
-        >
-          <Plus weight="bold" />
-        </NewTask>
-      </TaskListContainer>
+          >
+            <Plus weight="bold" />
+          </NewTask>
+        </TaskListContainer>
+      </SortableContext>
       {isModalOpen && (
         <UpdateTaskModal
           type={modalStatus}

@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import store from './store';
 import App from './App';
 import './i18n';
-import ErrorBoundary from './components/errorBoundry/ErrorBoundry';
+import ErrorBoundary from './components/errorBoundary/ErrorBoundary';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(

@@ -41,12 +41,14 @@ function UpdateTaskModal(props: Props) {
   const addTaskHandler = async (data: NewTask) => {
     try {
       await addTask({
-        boardId: props.boardId,
-        columnId: props.columnId ?? '',
         body: {
           ...data,
           userId: userId,
           description: 'DUMMY DESCRIPTION',
+        },
+        urlData: {
+          boardId: props.boardId,
+          columnId: props.columnId ?? '',
         },
       }).unwrap();
     } catch (err) {

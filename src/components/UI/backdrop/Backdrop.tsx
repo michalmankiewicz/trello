@@ -3,7 +3,6 @@ import { BackdropContainer } from './Backdrop.styled';
 
 type BackDropProp = {
   onClick?: () => void;
-  // children?: React.ReactNode;
 };
 
 const Backdrop = (props: BackDropProp) => {

@@ -20,4 +20,12 @@ export const apiSlice = createApi({
 });
 
 export const allPendingSelector = (state: RootState) =>
-  Object.values(state.api.queries).some((query) => query!.status === 'pending');
+  Object.values(state.api.queries).some((query) => query!.status === 'pending') ||
+  Object.values(state.api.mutations).some(
+    (query) =>
+      query!.status === 'pending' &&
+      query!.endpointName !== 'editTask' &&
+      query!.endpointName !== 'editColumn'
+  );
+
+// checking if editTask and editColumn to prevent loading spinner to appear during optimistic request

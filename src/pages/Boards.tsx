@@ -25,8 +25,8 @@ function Boards() {
   const [chosenBoardData, setChosenBoardData] = useState<Board | undefined>();
 
   const updateBoards = useCallback(
-    (type: updateTypes | undefined, boardData?: Board) => {
-      setModalStatus(type);
+    (actionType: updateTypes | undefined, boardData?: Board) => {
+      setModalStatus(actionType);
       setChosenBoardData(boardData);
       openModal();
     },

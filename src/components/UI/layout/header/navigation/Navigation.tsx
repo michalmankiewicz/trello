@@ -3,7 +3,7 @@ import { NavList, NavItem } from './Navigation.style';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAppSelector } from '../../../../../types/redux';
-import { selectisAuth } from '../../../../../store/auth/authSelectors';
+import { selectIsAuth } from '../../../../../store/auth/authSelectors';
 import { logOut } from '../../../../../services/auth';
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
 
 function Navigation(props: Props) {
   const { t } = useTranslation();
-  const isAuth = useAppSelector(selectisAuth);
+  const isAuth = useAppSelector(selectIsAuth);
 
   let content: JSX.Element;
   if (isAuth) {
